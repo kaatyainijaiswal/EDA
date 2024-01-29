@@ -1,0 +1,179 @@
+# **Twitter US Airline Sentiment**
+### LA - 1 Exploratory Data Analysis
+#### Submitted By:- Kaatyaini Jaiswal,1NT21IS071, 5 B
+## ***Introduction***
+#### In the fast-paced world of the US airline industry, Twitter has become a crucial platform for communication, customer service, and brand management. With its concise format and real-time capabilities, Twitter has revolutionized how airlines interact with passengers and shape their brand perception.Customer service has been transformed through Twitter, providing passengers with a direct line to airlines for inquiries, assistance, and feedback. Airlines have dedicated teams to monitor and promptly respond to customer inquiries, enhancing satisfaction and showcasing transparency.Twitter also plays a significant role in shaping brand perception, as every tweet contributes to the narrative surrounding an airline's identity. Airlines leverage Twitter to showcase exemplary customer service interactions, share heartwarming stories, and address customer complaints swiftly to maintain a positive brand image
+
+```{r}
+# Load the Dataset
+data <- read.csv("C:\\Users\\Shatakshi\\Desktop\\eda la1.csv")
+# Data Summary
+summary(data)
+```
+
+```{r}
+# Gives the structure
+str(data)
+```
+
+```{r}
+#To find missing values
+any(is.na(data))
+```
+
+```{r}
+# Retrieves the names of all the columns present in the dataset
+names(data)
+```
+
+```{r}
+# Outputs the initial rows of the dataset
+head(data)
+```
+
+```{r}
+# Outputs the summary of the dataset like max, min, Quartiles etc..
+summary(data$tweet_id)
+```
+
+```{r}
+# Outputs the standard deviation of the dataset
+sd(data$tweet_id)
+```
+
+```{r}
+sum(is.na(data))
+```
+
+```{r}
+ # for data manipulation
+library(dplyr)
+```
+
+```{r}
+# visualizing interesting and interactive graphs
+library(ggplot2)
+```
+
+```{r}
+
+#Calculate mean of a specific column
+ mean(data$tweet_id)
+
+```
+
+```{r}
+#checking data type of a column
+class(data$airline)
+```
+
+```{r}
+
+#Visualizing the Top Countries in Higher Learning
+
+height<- sort(table(data$negativereason_confidence), decreasing = TRUE)
+
+barplot(height[1:10], las = 3, main = "negative reasoning Top 3")
+```
+
+```{r}
+# Plotting a Function Curve for the given dataset
+curve(x^2, from = -10, to = 10, col = "blue", lwd = 2)
+```
+
+```{r}
+# Creating a Scatter Plot for world rank vs national rank
+library(ggplot2)
+ggplot(data, aes(x = airline, y = negativereason_confidence)) + geom_point()
+```
+
+
+
+```{r}
+
+# Making a Dot Plot of World_Rank column
+
+dotchart(data$tweet_id, pch = 19, col = "brown", main = "Dot Plot")
+```
+
+```{r}
+# generates a bar plot 
+ggplot(data,aes(x= airline, fill = "#FF5733")) + geom_bar ()
+```
+
+```{r}
+#View(tweets)
+data[3:4,]
+```
+
+```{r}
+#
+ggplot(data) + aes(airline,fill= airline) + geom_bar() +geom_text(stat='count', aes(label=..count..), vjust=1.6, color="black")  + labs(title= 'Plot of Airlines') +  theme_minimal() + guides(fill =  F)
+```
+
+```{r}
+ggplot(data) + aes(airline_sentiment,fill= airline_sentiment) + geom_bar() +geom_text(stat='count', aes(label=..count..), vjust=1.6, color="white")  + labs(title= 'Plot of Sentiments') +
+  scale_fill_manual(values = c("#ff576a","#3db5ff", "#66CC99"))+  theme_minimal() + guides(fill= F)
+```
+
+```{r}
+ggplot(data, aes(x = airline , fill = airline_sentiment))+ geom_bar( colour = 'black')  + scale_fill_manual(values = c("#ff576a","#3db5ff", "#66CC99")) + labs(x = 'airlines', y = 'Proportion', title ='Tweet Sentiment by Airline') + theme(axis.text.x = element_text(angle = 25, size=9)) +  theme_minimal() + guides(fill= F)
+```
+
+```{r}
+ggplot(data) +
+aes(x= negativereason, fill=negativereason ) + facet_wrap(~airline) + geom_bar() + 
+labs(x = 'Negative Reason', y = 'Count', title ='Negative reason per Airline')+theme(axis.text.x = element_text(angle = 25, size=6)) + guides(fill= F)
+```
+
+```{r}
+data$text_length <- sapply(data$text, function(x) nchar(x))
+
+ggplot(data, aes(x = text_length, 
+    fill = airline_sentiment))  +
+  geom_density(alpha = 0.5)  +
+  labs(x = 'Length of Text', title= 'Distribution of Text Lengths with Sentiment')  +
+  theme(text = element_text(size=12)) +
+  scale_fill_manual(values = c("#ff576a","#3db5ff", "#66CC99")) +  theme_minimal()
+```
+
+```{r}
+library(wordcloud)
+```
+
+```{r}
+
+library(gganimate)
+```
+
+```{r}
+#Calculates the standard deviation a dataset
+sd(data$airline)
+
+```
+## ***Analysis***
+#### The analysis of tweets directed at US airlines reveals valuable insights into customer sentiments, airline responsiveness, and prevalent issues within the industry. By examining the content, frequency, and tone of tweets, along with the airlines' responses, trends and patterns can be identified to inform strategic decision-making and improve customer satisfaction.One aspect of the analysis involves sentiment analysis, which categorizes tweets as positive, negative, or neutral based on the language used. This provides an overview of overall customer satisfaction and highlights areas where improvements may be needed. Additionally, analyzing the frequency and timing of tweets can indicate peak periods of customer engagement and potential service disruptions.
+```{r}
+# Making a Dot Plot of World_Rank column
+
+dotchart(data$tweet_id, pch = 19, col = "pink", main = "Dot Plot")
+```
+
+```{r}
+# Plotting a Function Curve for the given dataset
+curve(x^2, from = -10, to = 10, col = "red", lwd = 2)
+```
+
+```{r}
+#Calculates the standard deviation a dataset
+sd(data$ltweet_id)
+```
+
+
+
+```{r}
+#converting data type
+as.numeric(data$negativereason_confidence)
+```
+
+### Github Link- https://github.com/kaatyainijaiswal/EDA
